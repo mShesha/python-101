@@ -4,7 +4,6 @@
 ##
 
 import sys
-import string
 
 def hello(name):
     print("Hello, %s" % (name))
