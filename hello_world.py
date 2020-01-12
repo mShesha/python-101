@@ -1,3 +1,8 @@
+##
+# hello_world.py
+# Takes input of your name from STDIN and prints the first name.
+##
+
 import sys
 import string
 
