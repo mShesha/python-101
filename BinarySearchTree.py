@@ -76,6 +76,69 @@ def levelOrderTraversal(rootNode):
             if root.rightChild is not None:
                 customQueue.enqueue(root.rightChild)
 
+# time complexity : O(log N)
+# space complexity : O(log N)
+
+def searchBST(rootNode, nodeVale):
+    if rootNode.data == nodeVale:
+        print("Found the value")
+    elif nodeVale < rootNode.data:
+        if rootNode.leftChild.data == nodeVale:
+            print("Found the value")
+        else:
+             searchBST(rootNode.leftChild, nodeVale)
+    elif nodeVale > rootNode.data:
+        if rootNode.rightChild.data == nodeVale:
+            print("Found the value")
+        else:
+             searchBST(rootNode.rightChild, nodeVale) 
+    else:
+        print("Value not found")
+
+# delete BST
+# The node to be deleted is a leaf node
+# The node has one child
+# The node has two children
+
+# time complexity : O(log N)
+# space complexity: O(log N)
+
+def minValue(bstNode):
+    currentNode = bstNode
+    while (currentNode.leftChild is not None):
+        currentNode = currentNode.leftChild
+    return currentNode
+
+def deleteNode(rootNode,value):
+    if rootNode is None:
+        return rootNode
+    if value < rootNode.data:
+        rootNode.leftChild = deleteNode(rootNode.leftChild, value)
+    elif value > rootNode.data:
+        rootNode.rightChild = deleteNode(rootNode.rightChild, value)
+    else:
+        if rootNode.leftChild is None:
+            temp = rootNode.rightChild
+            rootNode = None
+            return temp
+        if rootNode.rightChild is None:
+            temp = rootNode.leftChild
+            rootNode = None
+            return temp
+
+        temp = minValue(rootNode.rightChild)
+        rootNode.data = temp.data
+        rootNode.rightChild = deleteNode(rootNode.rightChild, temp.data)
+    return rootNode
+
+# time complexity : O(1)
+# space complexity : O(1)
+
+def deleteBST(rootNode):
+    rootNode.leftChild = None
+    rootNode.rightChild = None
+    rootNode.data = None
+    return "the BST has been sucessfully deleted"    
 
 newBST = BSTNode(None)
 print(insertNode(newBST,70))
@@ -94,3 +157,14 @@ print("postOrderTraversal")
 postOrderTraversal(newBST)
 print("levelOrderTraversal")
 levelOrderTraversal(newBST)
+print("Searching BST")
+searchBST(newBST, 80)
+deleteNode(newBST,20)
+print("levelOrderTraversal")
+levelOrderTraversal(newBST)
+deleteNode(newBST,90)
+print("levelOrderTraversal")
+levelOrderTraversal(newBST)
+print(deleteBST(newBST))
+levelOrderTraversal(newBST)
+
